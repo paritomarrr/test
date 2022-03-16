@@ -14,6 +14,7 @@ module.exports = {
   networks: {
     hardhat: {},
     ropsten: {
+      // url: ALCHEMY_API_URL,
       url: providers.findMeAProvider(),
       accounts: [`0x${PRIVATE_KEY}`]
     }
