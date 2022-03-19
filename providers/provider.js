@@ -1,22 +1,33 @@
+const { ethers } = require("hardhat");
+
 const alchemyProvider = {
-    provider: process.env.ALCHEMY_API_URL
+    provider: new ethers.providers.JsonRpcProvider(process.env.ALCHEMY_API_URL)
+}
+const INFURAProvider = {
+    provider: new ethers.providers.JsonRpcProvider(process.env.INFURA_API_URL)
 }
 
-export async function findMeAProvider() {
+const findMeAProvider = async () => {
+    console.log("GOING TO FIND A PROVIDER");
     try { 
         // code for alchemy
-        await alchemyProvider.provider;
+        // console.log(await alchemyProvider.provider.getNetwork());
+        await alchemyProvider.provider.getNetwork();
         console.log('Alchemy is running ')
+        return alchemyProvider.provider
     }
     catch (err) {
-        console.error("Found error in ALCHEMY ", error.message);
+        console.error("Found error in ALCHEMY ", err.message);
     }
     try {
         // code for infura
+        await INFURAProvider.provider.getNetwork();
         console.log('Infura is running ')
+        return INFURAProvider.provider
     }
     catch (err) {
-        console.error("Found error in INFURA ", error.message);
-    }
-    
+        console.error("Found error in INFURA ", err.message);
+    }   
 }
+
+module.exports.findMeAProvider = findMeAProvider
