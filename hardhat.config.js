@@ -2,24 +2,18 @@
  * @type import('hardhat/config').HardhatUserConfig
  */
 
+
 require('dotenv').config();
 require('@nomiclabs/hardhat-ethers');
 
-const {ALCHEMY_API_URL, PRIVATE_KEY} = process.env;
-const providers = require('./providers/provider')
-
 module.exports = {
   solidity: "0.7.3",
-  defaultNetwork: 'ropsten',
+  defaultNetwork: 'hardhat',
   networks: {
-    hardhat: {},
-    ropsten: {
-      // url: ALCHEMY_API_URL,
-      url: providers.findMeAProvider(),
-      accounts: [`0x${PRIVATE_KEY}`]
+    hardhat: {
+    },  //network1
+    "truffle-dashboard": {
+      url: "http://localhost:24012/rpc"
     }
   }
-  // api key
-  // wallet pass
-
 };
