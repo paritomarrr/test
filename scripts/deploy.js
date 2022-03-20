@@ -1,8 +1,11 @@
 const { ethers } = require("hardhat");
-const providers = require('../providers/provider');
+// const providers = require('../providers/provider');
+const providers = require('../index.js')
+const {ALCHEMY_API_URL, INFURA_API_URL} = process.env
+
 
 async function main () {
-    const provider = await providers.findMeAProvider();
+    const provider = await providers.getProvider(ALCHEMY_API_URL, INFURA_API_URL);
     let signer = new ethers.Wallet(process.env.PRIVATE_KEY);
     signer = signer.connect(provider);
     const HelloWorld = await ethers.getContractFactory("Helloworld"); //factoryInstance
